@@ -50,7 +50,9 @@ st.set_page_config(
 
 st.title("Creación de Imagenes 🍆")
 
-model_id = 'runwayml/stable-diffusion-v1-5'
+#model_id = 'runwayml/stable-diffusion-v1-5'
+
+model_id = "nitrosocke/mo-di-diffusion"
 
 option = st.radio('Modelo', ("Texto", "Imagen"), 0)
 
@@ -62,8 +64,6 @@ enter = st.button('Enter', type = "primary")
 if option == "Texto" and enter:
 
         from diffusers import StableDiffusionPipeline
-        
-        st.write(str(torch.cuda.is_available()))
 
         pipe_load = StableDiffusionPipeline.from_pretrained(
             model_id,
