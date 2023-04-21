@@ -50,7 +50,8 @@ st.set_page_config(
 
 st.title("Creación de Imagenes 🍆")
 
-if False:
+if True:
+#cambio
 
     model_id = "runwayml/stable-diffusion-v1-5"
 
