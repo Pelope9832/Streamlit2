@@ -69,7 +69,7 @@ if True:
                 model_id,
                 revision="fp16" if not torch.cuda.is_available() else "fp32",
                 torch_dtype=torch.float16 if not torch.cuda.is_available() else torch.float32, 
-                ).to("device")
+                ).to("cpu")
 
             with st.empty():
                 image_pipe = pipe(prompt, negative_prompt=prompt_negativo, width=728, height=728, callback = pipe_callback) #otras variables: guidance_scale=guidance_scale, num_inference_steps=steps
