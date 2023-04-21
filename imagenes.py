@@ -50,64 +50,64 @@ st.set_page_config(
 
 st.title("Creación de Imagenes 🍆")
 
-if True:
+model_id = 'runwayml/stable-diffusion-v1-5'
 
-    model_id = 'runwayml/stable-diffusion-v1-5'
+option = st.radio('Modelo', ("Texto", "Imagen"), 0)
 
-    option = st.radio('Modelo', ("Texto", "Imagen"), 0)
+prompt = st.text_input("Prompt","")
+prompt_negativo = st.text_input("Negatives","")
 
-    prompt = st.text_input("Prompt","")
-    prompt_negativo = st.text_input("Negatives","")
+enter = st.button('Enter', type = "primary")
 
-    enter = st.button('Enter', type = "primary")
+if option == "Texto" and enter:
 
-    if option == "Texto" and enter:
+        from diffusers import StableDiffusionPipeline
 
-            from diffusers import StableDiffusionPipeline
+        pipe_load = StableDiffusionPipeline.from_pretrained(
+            model_id,
+            revision="fp16" if torch.cuda.is_available() else "fp32",
+            torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32, 
+            )
+        
+        pipe = pipe_load.to("cuda")
 
-            pipe = StableDiffusionPipeline.from_pretrained(
+        with st.empty():
+            image_pipe = pipe(prompt, negative_prompt=prompt_negativo, width=728, height=728, callback = pipe_callback) #otras variables: guidance_scale=guidance_scale, num_inference_steps=steps
+            st.write("FIN")
+
+
+        imagen = image_pipe.images[0]
+
+        st.image(imagen)
+
+
+
+if option == "Imagen":
+
+    uploaded_file = st.file_uploader("Elige una imagen", type = ['png', 'jpg'], accept_multiple_files=False)
+
+    if uploaded_file is not None:
+        st.write(uploaded_file.name)
+        st.image(uploaded_file)
+
+    if enter:
+
+        from diffusers import StableDiffusionImg2ImgPipeline
+        from PIL import Image
+
+        uploaded_file = Image.open(uploaded_file)
+
+        pipe = StableDiffusionImg2ImgPipeline.from_pretrained(
                 model_id,
-                revision="fp16" if not torch.cuda.is_available() else "fp32",
-                torch_dtype=torch.float16 if not torch.cuda.is_available() else torch.float32, 
-                ).to("cpu")
+                revision="fp16" if torch.cuda.is_available() else "fp32",
+                torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32, 
+                ).to("cuda")
 
-            with st.empty():
-                image_pipe = pipe(prompt, negative_prompt=prompt_negativo, width=728, height=728, callback = pipe_callback) #otras variables: guidance_scale=guidance_scale, num_inference_steps=steps
-                st.write("FIN")
+        with st.empty():
+            imagen = pipe(prompt, image=uploaded_file, negative_prompt=prompt_negativo, callback = pipe_callback).images[0]
+            st.write("")
 
-
-            imagen = image_pipe.images[0]
-
-            st.image(imagen)
-
-
-
-    if option == "Imagen":
-
-        uploaded_file = st.file_uploader("Elige una imagen", type = ['png', 'jpg'], accept_multiple_files=False)
-
-        if uploaded_file is not None:
-            st.write(uploaded_file.name)
-            st.image(uploaded_file)
-
-        if enter:
-
-            from diffusers import StableDiffusionImg2ImgPipeline
-            from PIL import Image
-
-            uploaded_file = Image.open(uploaded_file)
-
-            pipe = StableDiffusionImg2ImgPipeline.from_pretrained(
-                    model_id,
-                    revision="fp16" if torch.cuda.is_available() else "fp32",
-                    torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32, 
-                    ).to("cuda")
-
-            with st.empty():
-                imagen = pipe(prompt, image=uploaded_file, negative_prompt=prompt_negativo, callback = pipe_callback).images[0]
-                st.write("")
-
-            st.image(imagen)
+        st.image(imagen)
 
 
 
