@@ -50,7 +50,7 @@ st.set_page_config(
 
 st.title("Creación de Imagenes 🍆")
 
-model_id = r"..\7. Generador_imagenes\3. Stable_diffusion web\stable-diffusion-v1-5"
+model_id = "runwayml/stable-diffusion-v1-5"
 
 option = st.radio('Modelo', ("Texto", "Imagen"), 0)
 
