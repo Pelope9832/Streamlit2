@@ -67,8 +67,8 @@ if True:
 
             pipe = StableDiffusionPipeline.from_pretrained(
                 model_id,
-                revision="fp16" if not torch.cuda.is_available() else "fp32",
-                torch_dtype=torch.float16 if not torch.cuda.is_available() else torch.float32, 
+                revision="fp16" if torch.cuda.is_available() else "fp32",
+                torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32, 
                 ).to("cuda")
 
             with st.empty():
