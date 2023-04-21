@@ -67,8 +67,8 @@ if option == "Texto" and enter:
 
         pipe_load = StableDiffusionPipeline.from_pretrained(
             model_id,
-            revision = "fp16" if torch.cuda.is_available() else "fp32",
-            torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32, 
+            revision = "fp16",
+            torch_dtype = torch.float16, 
             )
         
         pipe = pipe_load.to("cuda")
@@ -151,3 +151,13 @@ if option == "Imagen":
                     file_name="flower.png",
                     mime="image/png"
                 )
+       # ######################
+       # Cosas cambiadas
+       # ######################
+     
+            
+      pipe_load = StableDiffusionPipeline.from_pretrained(
+        model_id,
+        revision = "fp16" if torch.cuda.is_available() else "fp32",
+        torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32, 
+        )
