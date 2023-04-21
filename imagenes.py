@@ -156,8 +156,8 @@ if option == "Imagen":
        # ######################
      
             
-      pipe_load = StableDiffusionPipeline.from_pretrained(
-        model_id,
-        revision = "fp16" if torch.cuda.is_available() else "fp32",
-        torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32, 
-        )
+      #pipe_load = StableDiffusionPipeline.from_pretrained(
+       # model_id,
+        #revision = "fp16" if torch.cuda.is_available() else "fp32",
+        #torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32, 
+        #)
