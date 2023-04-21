@@ -52,7 +52,7 @@ st.title("Creación de Imagenes 🍆")
 
 if True:
 
-    model_id = "runwayml/stable-diffusion-v1-5/tree/main"
+    model_id = "runwayml/stable-diffusion-v1-5/tree/main/"
 
     option = st.radio('Modelo', ("Texto", "Imagen"), 0)
 
