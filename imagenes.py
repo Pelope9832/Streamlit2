@@ -62,11 +62,13 @@ enter = st.button('Enter', type = "primary")
 if option == "Texto" and enter:
 
         from diffusers import StableDiffusionPipeline
+        
+        st.write(str(torch.cuda.is_available()))
 
         pipe_load = StableDiffusionPipeline.from_pretrained(
             model_id,
-            revision="fp16" if torch.cuda.is_available() else "fp32",
-            torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32, 
+            revision = "fp16" if torch.cuda.is_available() else "fp32",
+            torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32, 
             )
         
         pipe = pipe_load.to("cuda")
