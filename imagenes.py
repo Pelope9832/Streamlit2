@@ -68,8 +68,9 @@ if option == "Texto" and enter:
                     
         pipe_load = StableDiffusionPipeline.from_pretrained(
          model_id,
-         revision = "fp16",
-         torch_dtype = torch.float16,  
+         #revision = "fp16",
+         #torch_dtype = torch.float16,
+         use_auth_token=True,
         )
         
         pipe = pipe_load.to("cpu")
