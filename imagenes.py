@@ -66,14 +66,14 @@ if option == "Texto" and enter:
         from diffusers import StableDiffusionPipeline
 
                     
-        pipe_load = StableDiffusionPipeline.from_pretrained(
+        pipe = StableDiffusionPipeline.from_pretrained(
          model_id,
          #revision = "fp16",
          #torch_dtype = torch.float16,
          use_auth_token=False,
         )
         
-        pipe = pipe_load.to("cuda")
+        #pipe = pipe_load.to("cuda")
 
         with st.empty():
             image_pipe = pipe(prompt, negative_prompt=prompt_negativo, width=728, height=728, callback = pipe_callback, num_inference_steps=15) #otras variables: guidance_scale=guidance_scale, num_inference_steps=steps
