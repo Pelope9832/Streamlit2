@@ -50,9 +50,9 @@ st.set_page_config(
 
 st.title("Creación de Imagenes 🍆")
 
-#model_id = 'runwayml/stable-diffusion-v1-5'
+model_id = 'runwayml/stable-diffusion-v1-5'
 
-model_id = "CompVis/stable-diffusion-v1-4"
+#model_id = "CompVis/stable-diffusion-v1-4"
 
 option = st.radio('Modelo', ("Texto", "Imagen"), 0)
 
