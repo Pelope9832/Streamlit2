@@ -70,7 +70,7 @@ if option == "Texto" and enter:
             callback = pipe_callback, 
             )
         
-        pipe = pipe_load.to("cpu")
+        pipe = pipe_load.to("cuda")
         
 
         with st.empty():
