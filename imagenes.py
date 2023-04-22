@@ -72,7 +72,7 @@ if option == "Texto" and enter:
          torch_dtype = torch.float16,  
         )
         
-        pipe = pipe_load.to("mps")
+        pipe = pipe_load.to("cpu")
         
 
         with st.empty():
