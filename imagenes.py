@@ -69,15 +69,14 @@ if option == "Texto" and enter:
         pipe_load = StableDiffusionPipeline.from_pretrained(
          model_id,
          revision = "fp16",
-         torch_dtype = torch.float16, 
-         callback = pipe_callback, 
+         torch_dtype = torch.float16,  
         )
         
         pipe = pipe_load.to("mps")
         
 
         with st.empty():
-            image_pipe = pipe(prompt, negative_prompt=prompt_negativo, width=728, height=728, callback = pipe_callback) #otras variables: guidance_scale=guidance_scale, num_inference_steps=steps
+            image_pipe = pipe(prompt, negative_prompt=prompt_negativo, width=728, height=728, callback = pipe_callback, num_inference_steps=15) #otras variables: guidance_scale=guidance_scale, num_inference_steps=steps
             st.write("FIN")
 
 
