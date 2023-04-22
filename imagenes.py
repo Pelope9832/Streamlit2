@@ -74,6 +74,7 @@ if option == "Texto" and enter:
         )
 
         @st.cache_data
+        
         pipe = pipe_load.to("cpu")
         
         @st.cache_data
