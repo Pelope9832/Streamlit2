@@ -52,7 +52,7 @@ st.title("Creación de Imagenes 🍆")
 
 #model_id = 'runwayml/stable-diffusion-v1-5'
 
-model_id = "nitrosocke/mo-di-diffusion"
+model_id = "CompVis/stable-diffusion-v1-4"
 
 option = st.radio('Modelo', ("Texto", "Imagen"), 0)
 
@@ -65,12 +65,15 @@ if option == "Texto" and enter:
 
         from diffusers import StableDiffusionPipeline
 
+                    
         pipe_load = StableDiffusionPipeline.from_pretrained(
-            model_id,
-            callback = pipe_callback, 
-            )
+         model_id,
+         revision = "fp16",
+         torch_dtype = torch.float16, 
+         callback = pipe_callback, 
+        )
         
-        pipe = pipe_load.to("cuda")
+        pipe = pipe_load.to("cpu")
         
 
         with st.empty():
