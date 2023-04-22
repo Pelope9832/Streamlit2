@@ -68,12 +68,12 @@ if option == "Texto" and enter:
                     
         pipe_load = StableDiffusionPipeline.from_pretrained(
          model_id,
-         revision = "fp32",
-         torch_dtype = torch.float32, 
+         revision = "fp16",
+         torch_dtype = torch.float16, 
          callback = pipe_callback, 
         )
         
-        pipe = pipe_load.to("cpu")
+        pipe = pipe_load.to("mps")
         
 
         with st.empty():
