@@ -72,9 +72,11 @@ if option == "Texto" and enter:
          #torch_dtype = torch.float16,
          use_auth_token=False,
         )
-        
+
+        @st.cache_data
         pipe = pipe_load.to("cpu")
         
+        @st.cache_data
 
         with st.empty():
             image_pipe = pipe(prompt, negative_prompt=prompt_negativo, width=728, height=728, callback = pipe_callback, num_inference_steps=15) #otras variables: guidance_scale=guidance_scale, num_inference_steps=steps
