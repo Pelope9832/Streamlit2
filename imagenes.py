@@ -73,7 +73,7 @@ if option == "Texto" and enter:
          #torch_dtype = torch.float16 if not torch.cuda.is_available() else torch.float32,
         )
         
-        pipe = pipe_load.to("cuda")
+        pipe = pipe_load.to("cpu")
 
         with st.empty():
             image_pipe = pipe(prompt, negative_prompt=prompt_negativo, width=728, height=728, callback = pipe_callback, num_inference_steps=1) #otras variables: guidance_scale=guidance_scale, num_inference_steps=steps
